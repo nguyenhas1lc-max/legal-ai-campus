@@ -2,1837 +2,438 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#eff7ff">
-  <meta name="description" content="LEGAL AI CAMPUS - Nền tảng mô phỏng thực hành nghiệp vụ Kiểm sát viên ứng dụng trí tuệ nhân tạo.">
-  <title>LEGAL AI CAMPUS | Học viện thực hành pháp lý số</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-  <style>
-    :root {
-      --blue: #2563eb;
-      --blue-dark: #173b78;
-      --cyan: #06b6d4;
-      --navy: #142c52;
-      --text: #233653;
-      --muted: #71829b;
-      --bg: #f4f9ff;
-      --white: #ffffff;
-      --border: #e1ebf7;
-      --shadow: 0 12px 35px rgba(33, 87, 153, .09);
-      --radius: 20px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "Be Vietnam Pro", sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      line-height: 1.65;
-    }
-
-    button, input, textarea {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: min(1160px, 92%);
-      margin: auto;
-    }
-
-    .topbar {
-      background: #e9f4ff;
-      border-bottom: 1px solid #dceafa;
-      color: #436083;
-      font-size: 12px;
-      padding: 8px 0;
-    }
-
-    .topbar-inner {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255,255,255,.94);
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .navbar {
-      min-height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 220px;
-    }
-
-    .brand-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 15px;
-      display: grid;
-      place-items: center;
-      color: white;
-      font-size: 23px;
-      background: linear-gradient(135deg, #2563eb, #06b6d4);
-      box-shadow: 0 8px 18px rgba(37,99,235,.2);
-    }
-
-    .brand-name {
-      font-size: 17px;
-      font-weight: 800;
-      letter-spacing: -.5px;
-      color: var(--navy);
-    }
-
-    .brand-sub {
-      font-size: 9px;
-      color: var(--muted);
-      letter-spacing: 1px;
-      font-weight: 600;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 23px;
-      font-size: 13px;
-      font-weight: 600;
-      color: #526783;
-    }
-
-    .nav-links a:hover {
-      color: var(--blue);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .btn {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      gap: 9px;
-      border: 0;
-      border-radius: 12px;
-      padding: 12px 19px;
-      font-size: 13px;
-      font-weight: 700;
-      transition: .25s;
-    }
-
-    .btn-primary {
-      color: white;
-      background: linear-gradient(120deg, #2563eb, #0891b2);
-      box-shadow: 0 7px 18px rgba(37,99,235,.19);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 25px rgba(37,99,235,.25);
-    }
-
-    .btn-outline {
-      color: var(--blue);
-      background: white;
-      border: 1px solid #cfe0f7;
-    }
-
-    .btn-outline:hover {
-      background: #edf6ff;
-    }
-
-    .menu-toggle {
-      display: none;
-      border: 0;
-      background: transparent;
-      color: var(--navy);
-      font-size: 23px;
-    }
-
-    .hero {
-      padding: 78px 0 65px;
-      overflow: hidden;
-      position: relative;
-      background:
-        radial-gradient(circle at 80% 20%, rgba(6,182,212,.12), transparent 28%),
-        radial-gradient(circle at 10% 90%, rgba(37,99,235,.09), transparent 30%),
-        linear-gradient(135deg, #f8fbff, #eaf5ff);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.08fr .92fr;
-      gap: 45px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: #2563eb;
-      background: #e5f1ff;
-      border: 1px solid #d5e8ff;
-      border-radius: 30px;
-      padding: 7px 13px;
-      font-size: 11px;
-      font-weight: 700;
-      margin-bottom: 22px;
-    }
-
-    .hero h1 {
-      font-size: clamp(34px, 5vw, 55px);
-      line-height: 1.2;
-      letter-spacing: -1.8px;
-      color: #142d55;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 span {
-      background: linear-gradient(90deg, #2563eb, #06b6d4);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-desc {
-      max-width: 590px;
-      color: #637893;
-      font-size: 15px;
-      line-height: 1.9;
-      margin-bottom: 27px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .hero-note {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      margin-top: 28px;
-      color: #607793;
-      font-size: 11px;
-    }
-
-    .hero-note i {
-      color: #0d9fc0;
-      margin-right: 5px;
-    }
-
-    .hero-visual {
-      min-height: 410px;
-      position: relative;
-      display: grid;
-      place-items: center;
-    }
-
-    .visual-glow {
-      position: absolute;
-      width: 330px;
-      height: 330px;
-      background: linear-gradient(135deg, #c6e5ff, #d6f7ff);
-      border-radius: 50%;
-      filter: blur(3px);
-    }
-
-    .visual-card {
-      width: 310px;
-      height: 355px;
-      z-index: 2;
-      border-radius: 27px;
-      background: linear-gradient(160deg, #ffffff, #e7f4ff);
-      border: 1px solid white;
-      box-shadow: 0 25px 60px rgba(37,99,235,.17);
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .visual-card::before {
-      content: "";
-      position: absolute;
-      inset: 14px;
-      border: 1px solid #dcecff;
-      border-radius: 20px;
-    }
-
-    .visual-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      padding: 25px;
-    }
-
-    .visual-emblem {
-      width: 135px;
-      height: 135px;
-      border-radius: 50%;
-      margin: 0 auto 18px;
-      display: grid;
-      place-items: center;
-      font-size: 58px;
-      color: #2563eb;
-      background: linear-gradient(145deg, #e1f2ff, #fff);
-      border: 7px solid white;
-      box-shadow: 0 10px 30px rgba(37,99,235,.12);
-    }
-
-    .visual-content h3 {
-      color: #173b78;
-      font-size: 17px;
-      margin-bottom: 5px;
-    }
-
-    .visual-content p {
-      font-size: 10px;
-      color: #7186a3;
-    }
-
-    .floating-chip {
-      position: absolute;
-      z-index: 3;
-      background: white;
-      padding: 12px 15px;
-      border: 1px solid #e0edfb;
-      border-radius: 14px;
-      box-shadow: var(--shadow);
-      color: #315274;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .floating-chip i {
-      color: #0b9fca;
-      margin-right: 7px;
-    }
-
-    .chip-one {
-      top: 35px;
-      left: -5px;
-    }
-
-    .chip-two {
-      bottom: 40px;
-      right: -5px;
-    }
-
-    .section {
-      padding: 75px 0;
-    }
-
-    .section-heading {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 42px;
-    }
-
-    .section-heading .tag {
-      font-size: 11px;
-      font-weight: 800;
-      color: #168bbd;
-      letter-spacing: 1.4px;
-      text-transform: uppercase;
-    }
-
-    .section-heading h2 {
-      color: var(--navy);
-      font-size: clamp(25px, 4vw, 35px);
-      line-height: 1.35;
-      margin: 10px 0;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .stats {
-      margin-top: -25px;
-      position: relative;
-      z-index: 5;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 19px;
-      box-shadow: var(--shadow);
-      padding: 24px 10px;
-    }
-
-    .stat {
-      text-align: center;
-      border-right: 1px solid var(--border);
-    }
-
-    .stat:last-child {
-      border: 0;
-    }
-
-    .stat strong {
-      display: block;
-      color: var(--blue);
-      font-size: 26px;
-      font-weight: 800;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .feature-card {
-      padding: 25px;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      transition: .25s;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow);
-      border-color: #c5dcfa;
-    }
-
-    .feature-icon {
-      width: 48px;
-      height: 48px;
-      display: grid;
-      place-items: center;
-      border-radius: 15px;
-      color: #2563eb;
-      background: #eaf3ff;
-      font-size: 21px;
-      margin-bottom: 17px;
-    }
-
-    .feature-card h3 {
-      font-size: 15px;
-      color: var(--navy);
-      margin-bottom: 9px;
-    }
-
-    .feature-card p {
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    .cases-section {
-      background: linear-gradient(180deg, #edf6ff, #f7fbff);
-    }
-
-    .case-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .case-card {
-      overflow: hidden;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 19px;
-      box-shadow: 0 7px 22px rgba(40,80,130,.05);
-      transition: .25s;
-    }
-
-    .case-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow);
-    }
-
-    .case-cover {
-      height: 145px;
-      display: grid;
-      place-items: center;
-      position: relative;
-      background: linear-gradient(135deg, #dceeff, #e5faff);
-      overflow: hidden;
-    }
-
-    .case-cover i {
-      font-size: 53px;
-      color: #3975c9;
-      opacity: .85;
-    }
-
-    .case-cover::after {
-      content: "";
-      position: absolute;
-      width: 190px;
-      height: 190px;
-      border: 1px solid rgba(37,99,235,.14);
-      border-radius: 50%;
-    }
-
-    .case-body {
-      padding: 20px;
-    }
-
-    .case-label {
-      display: inline-block;
-      padding: 5px 9px;
-      background: #eaf4ff;
-      color: #2870c9;
-      font-size: 9px;
-      border-radius: 20px;
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-
-    .case-body h3 {
-      font-size: 15px;
-      color: var(--navy);
-      margin-bottom: 9px;
-    }
-
-    .case-body p {
-      font-size: 11px;
-      color: var(--muted);
-      min-height: 55px;
-    }
-
-    .case-meta {
-      display: flex;
-      justify-content: space-between;
-      margin: 15px 0;
-      color: #71829b;
-      font-size: 10px;
-    }
-
-    .case-action {
-      width: 100%;
-      border: 1px solid #d6e7fb;
-      border-radius: 10px;
-      padding: 10px;
-      background: #f3f8ff;
-      color: var(--blue);
-      font-size: 11px;
-      font-weight: 800;
-    }
-
-    .case-action:hover {
-      background: var(--blue);
-      color: white;
-    }
-
-    .roles-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 17px;
-    }
-
-    .role-card {
-      display: flex;
-      gap: 15px;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 19px;
-    }
-
-    .role-icon {
-      flex-shrink: 0;
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 13px;
-      background: #eaf4ff;
-      color: #2563eb;
-      font-size: 18px;
-    }
-
-    .role-card h3 {
-      color: var(--navy);
-      font-size: 13px;
-      margin-bottom: 5px;
-    }
-
-    .role-card p {
-      color: var(--muted);
-      font-size: 10px;
-      line-height: 1.7;
-    }
-
-    .workflow {
-      background: #fff;
-    }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 17px;
-    }
-
-    .step {
-      text-align: center;
-      padding: 20px 12px;
-      border: 1px solid var(--border);
-      background: #fbfdff;
-      border-radius: 16px;
-    }
-
-    .step-number {
-      width: 38px;
-      height: 38px;
-      margin: 0 auto 12px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      color: white;
-      background: linear-gradient(135deg, #2563eb, #06b6d4);
-      font-weight: 800;
-    }
-
-    .step h3 {
-      font-size: 12px;
-      color: var(--navy);
-      margin-bottom: 5px;
-    }
-
-    .step p {
-      font-size: 10px;
-      color: var(--muted);
-    }
-
-    .lab-section {
-      background: linear-gradient(135deg, #eaf5ff, #f5fbff);
-    }
-
-    .lab-panel {
-      display: grid;
-      grid-template-columns: .9fr 1.1fr;
-      gap: 30px;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 23px;
-      padding: 30px;
-      box-shadow: var(--shadow);
-    }
-
-    .lab-info h2 {
-      color: var(--navy);
-      font-size: 25px;
-      margin: 12px 0;
-    }
-
-    .lab-info p {
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.9;
-    }
-
-    .lab-bullets {
-      margin-top: 17px;
-      list-style: none;
-      font-size: 11px;
-      color: #506782;
-    }
-
-    .lab-bullets li {
-      margin: 9px 0;
-    }
-
-    .lab-bullets i {
-      color: #0c9fc1;
-      margin-right: 7px;
-    }
-
-    .chat-box {
-      background: #f6faff;
-      border: 1px solid #dfebfa;
-      border-radius: 17px;
-      overflow: hidden;
-    }
-
-    .chat-header {
-      padding: 14px 17px;
-      background: #eaf4ff;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #1e477e;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .chat-header i {
-      color: #168cc0;
-      font-size: 18px;
-    }
-
-    .chat-messages {
-      height: 235px;
-      padding: 16px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .message {
-      max-width: 90%;
-      padding: 11px 13px;
-      border-radius: 13px;
-      font-size: 11px;
-      line-height: 1.7;
-    }
-
-    .message.ai {
-      background: white;
-      border: 1px solid #e3edf8;
-      align-self: flex-start;
-    }
-
-    .message.user {
-      background: #e2efff;
-      color: #244c80;
-      align-self: flex-end;
-    }
-
-    .chat-input {
-      display: flex;
-      gap: 8px;
-      padding: 12px;
-      border-top: 1px solid #e1ebf7;
-      background: white;
-    }
-
-    .chat-input input {
-      min-width: 0;
-      flex: 1;
-      padding: 11px;
-      border: 1px solid #dce8f6;
-      border-radius: 10px;
-      outline: none;
-      font-size: 11px;
-    }
-
-    .chat-input button {
-      width: 42px;
-      border: 0;
-      border-radius: 10px;
-      color: white;
-      background: var(--blue);
-    }
-
-    .library-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 17px;
-    }
-
-    .library-card {
-      background: white;
-      padding: 22px;
-      border: 1px solid var(--border);
-      border-radius: 17px;
-    }
-
-    .library-card i {
-      font-size: 25px;
-      color: #2673d1;
-      margin-bottom: 13px;
-    }
-
-    .library-card h3 {
-      font-size: 13px;
-      color: var(--navy);
-      margin-bottom: 7px;
-    }
-
-    .library-card p {
-      font-size: 10px;
-      color: var(--muted);
-      min-height: 48px;
-    }
-
-    .library-card a {
-      display: inline-block;
-      margin-top: 13px;
-      color: var(--blue);
-      font-size: 10px;
-      font-weight: 800;
-    }
-
-    .notice {
-      background: #fff9e9;
-      border: 1px solid #f4e4b7;
-      color: #8a6922;
-      padding: 16px 19px;
-      border-radius: 13px;
-      font-size: 11px;
-      margin-top: 22px;
-    }
-
-    .notice i {
-      margin-right: 7px;
-    }
-
-    .cta {
-      padding: 55px 25px;
-      text-align: center;
-      border-radius: 25px;
-      color: white;
-      background: linear-gradient(120deg, #173b78, #2563eb, #0799bd);
-      box-shadow: 0 18px 45px rgba(37,99,235,.18);
-    }
-
-    .cta h2 {
-      font-size: 28px;
-      margin-bottom: 12px;
-    }
-
-    .cta p {
-      color: #dbeaff;
-      font-size: 12px;
-      margin-bottom: 22px;
-    }
-
-    .cta .btn {
-      color: #1d4b8c;
-      background: white;
-    }
-
-    footer {
-      background: #132c51;
-      color: #d5e3f6;
-      padding: 45px 0 20px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.3fr 1fr 1fr;
-      gap: 35px;
-      margin-bottom: 30px;
-    }
-
-    footer h3 {
-      color: white;
-      font-size: 14px;
-      margin-bottom: 13px;
-    }
-
-    footer p, footer a {
-      display: block;
-      color: #afc4df;
-      font-size: 10px;
-      line-height: 2;
-    }
-
-    footer a:hover {
-      color: white;
-    }
-
-    .copyright {
-      border-top: 1px solid rgba(255,255,255,.12);
-      padding-top: 17px;
-      text-align: center;
-      color: #9fb6d3;
-      font-size: 10px;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 500;
-      background: rgba(15,35,65,.55);
-      padding: 18px;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal.show {
-      display: flex;
-    }
-
-    .modal-content {
-      width: min(570px, 100%);
-      max-height: 90vh;
-      overflow-y: auto;
-      background: white;
-      border-radius: 20px;
-      padding: 27px;
-      box-shadow: 0 25px 70px rgba(0,0,0,.2);
-      position: relative;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 14px;
-      right: 17px;
-      width: 33px;
-      height: 33px;
-      border: 0;
-      border-radius: 50%;
-      background: #edf4fc;
-      color: #46617e;
-      font-size: 17px;
-    }
-
-    .modal-content h2 {
-      color: var(--navy);
-      font-size: 20px;
-      margin-bottom: 10px;
-      padding-right: 35px;
-    }
-
-    .modal-content p {
-      color: var(--muted);
-      font-size: 12px;
-      margin-bottom: 15px;
-    }
-
-    .modal-list {
-      background: #f4f8ff;
-      border: 1px solid #e2ecf8;
-      border-radius: 13px;
-      padding: 15px;
-      margin: 15px 0;
-      color: #49617d;
-      font-size: 11px;
-    }
-
-    .modal-list li {
-      margin: 8px 0 8px 17px;
-    }
-
-    .music-control {
-      position: fixed;
-      right: 17px;
-      bottom: 17px;
-      z-index: 90;
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      background: white;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      border-radius: 30px;
-      padding: 9px 13px;
-      font-size: 10px;
-      color: #42617f;
-    }
-
-    .music-control button {
-      border: 0;
-      background: transparent;
-      color: var(--blue);
-      font-size: 16px;
-    }
-
-    .music-control input {
-      width: 55px;
-      accent-color: var(--blue);
-    }
-
-    .toast {
-      position: fixed;
-      left: 50%;
-      bottom: 80px;
-      transform: translateX(-50%) translateY(20px);
-      z-index: 700;
-      opacity: 0;
-      pointer-events: none;
-      background: #173b78;
-      color: white;
-      border-radius: 12px;
-      padding: 12px 18px;
-      font-size: 11px;
-      transition: .25s;
-      box-shadow: var(--shadow);
-      max-width: 90%;
-      text-align: center;
-    }
-
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    @media (max-width: 900px) {
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 78px;
-        left: 0;
-        right: 0;
-        background: white;
-        padding: 20px 5%;
-        border-bottom: 1px solid var(--border);
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-
-      .nav-actions .btn-outline {
-        display: none;
-      }
-
-      .hero-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      .hero-desc {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .hero-buttons, .hero-note {
-        justify-content: center;
-      }
-
-      .hero-visual {
-        min-height: 380px;
-      }
-
-      .feature-grid, .roles-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .case-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .lab-panel {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .topbar-inner {
-        justify-content: center;
-        text-align: center;
-      }
-
-      .navbar {
-        min-height: 68px;
-      }
-
-      .brand-icon {
-        width: 41px;
-        height: 41px;
-      }
-
-      .brand-name {
-        font-size: 14px;
-      }
-
-      .brand-sub {
-        font-size: 8px;
-      }
-
-      .nav-actions .btn-primary {
-        padding: 9px 11px;
-        font-size: 10px;
-      }
-
-      .hero {
-        padding: 55px 0 45px;
-      }
-
-      .hero h1 {
-        font-size: 35px;
-      }
-
-      .hero-desc {
-        font-size: 12px;
-      }
-
-      .visual-card {
-        width: 270px;
-        height: 315px;
-      }
-
-      .visual-glow {
-        width: 280px;
-        height: 280px;
-      }
-
-      .chip-one {
-        left: -5px;
-      }
-
-      .chip-two {
-        right: -5px;
-      }
-
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px 0;
-      }
-
-      .stat:nth-child(2) {
-        border: 0;
-      }
-
-      .stat strong {
-        font-size: 22px;
-      }
-
-      .section {
-        padding: 55px 0;
-      }
-
-      .feature-grid, .case-grid, .roles-grid,
-      .steps, .library-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .case-body p {
-        min-height: auto;
-      }
-
-      .lab-panel {
-        padding: 18px;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 22px;
-      }
-
-      .cta h2 {
-        font-size: 22px;
-      }
-
-      .music-control {
-        right: 10px;
-        bottom: 10px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f4f8ff">
+<title>LEGAL AI CAMPUS | Học tập pháp lý thông minh</title>
+<style>
+:root{
+ --blue:#1769e0;--cyan:#21b8d5;--navy:#142c50;
+ --bg:#f4f8ff;--white:#fff;--muted:#71819a;
+ --line:#e3ebf6;--green:#159b72;--shadow:0 12px 35px #1a4b8010;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#20334e;font-family:Inter,Arial,sans-serif}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{color:var(--blue);text-decoration:none}
+.topbar{height:72px;background:#ffffffed;border-bottom:1px solid var(--line);
+ display:flex;align-items:center;justify-content:space-between;padding:0 6%;
+ position:sticky;top:0;z-index:10;backdrop-filter:blur(12px)}
+.brand{display:flex;align-items:center;gap:11px;font-weight:900;color:var(--navy);letter-spacing:.3px}
+.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--cyan));
+ display:grid;place-items:center;color:white;font-size:21px}
+.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:1.5px;margin-top:3px}
+.nav{display:flex;gap:7px;align-items:center}
+.nav button,.mobile-menu{border:0;background:transparent;padding:10px 13px;border-radius:10px;color:#53647d;font-weight:650}
+.nav button:hover,.nav button.active{background:#edf4ff;color:var(--blue)}
+.mobile-menu{display:none;font-size:22px}
+.container{width:min(1160px,90%);margin:auto}
+.hero{padding:65px 0 42px;display:grid;grid-template-columns:1.2fr .8fr;gap:35px;align-items:center}
+.eyebrow{color:var(--blue);font-size:12px;font-weight:800;letter-spacing:2px}
+h1{font-size:clamp(34px,5vw,57px);line-height:1.12;color:var(--navy);margin:16px 0}
+h1 span{color:var(--blue)}
+.lead{font-size:17px;line-height:1.8;color:var(--muted);max-width:620px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{border:0;border-radius:12px;padding:13px 19px;font-weight:750}
+.primary{background:linear-gradient(120deg,var(--blue),#398de9);color:white;box-shadow:0 8px 20px #1769e033}
+.secondary{background:white;color:var(--blue);border:1px solid #d9e7fb}
+.hero-art{background:linear-gradient(145deg,#e4f3ff,#f5fbff);border:1px solid #dcecff;
+ border-radius:30px;padding:28px;min-height:290px;display:grid;place-items:center;position:relative;overflow:hidden}
+.hero-art:before,.hero-art:after{content:"";position:absolute;border-radius:50%;border:1px solid #a9d8ff66;width:260px;height:260px}
+.hero-art:after{width:190px;height:190px}
+.hero-symbol{z-index:1;text-align:center}
+.hero-symbol .shield{width:125px;height:145px;margin:auto;display:grid;place-items:center;
+ clip-path:polygon(50% 0,94% 15%,88% 70%,50% 100%,12% 70%,6% 15%);
+ background:linear-gradient(145deg,#1769e0,#35c6dc);color:white;font-size:54px;
+ box-shadow:0 15px 30px #1769e044}
+.hero-symbol h3{color:var(--navy);margin:20px 0 5px}
+.hero-symbol p{color:var(--muted);font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:15px 0 55px}
+.stat,.card{background:white;border:1px solid var(--line);border-radius:18px;padding:21px;box-shadow:var(--shadow)}
+.stat strong{font-size:28px;color:var(--blue);display:block}
+.stat span{font-size:13px;color:var(--muted)}
+.section{padding:25px 0 55px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:22px}
+.section-head h2{margin:7px 0;color:var(--navy);font-size:27px}
+.section-head p{color:var(--muted);margin:0;line-height:1.6}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.feature{padding:23px}
+.feature-icon{width:47px;height:47px;border-radius:14px;background:#edf5ff;display:grid;place-items:center;font-size:23px}
+.feature h3{color:var(--navy);margin:17px 0 8px}
+.feature p{color:var(--muted);font-size:14px;line-height:1.7}
+.tag{display:inline-block;padding:6px 10px;border-radius:30px;background:#edf5ff;color:var(--blue);font-size:11px;font-weight:750}
+.scenario-card{display:flex;flex-direction:column;min-height:235px}
+.scenario-card h3{color:var(--navy);margin:13px 0 8px}
+.scenario-card p{font-size:13px;line-height:1.7;color:var(--muted);flex:1}
+.scenario-card button{align-self:flex-start}
+.page{display:none;padding:35px 0 65px;min-height:65vh}
+.page.active{display:block}
+.panel{background:white;border:1px solid var(--line);border-radius:20px;padding:25px;box-shadow:var(--shadow);margin-bottom:18px}
+.panel h2,.panel h3{color:var(--navy);margin-top:0}
+.form{display:grid;gap:13px;max-width:480px}
+.form input,.form textarea,.form select{width:100%;padding:13px;border:1px solid #dce6f3;border-radius:11px;background:#fbfdff;outline:none}
+.form input:focus,.form textarea:focus{border-color:var(--blue)}
+.form textarea{min-height:130px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.muted{color:var(--muted);line-height:1.7}
+.hidden{display:none!important}
+.question{padding:17px;border:1px solid var(--line);border-radius:13px;margin:13px 0}
+.question label{display:block;padding:8px 0;color:#53647d;cursor:pointer}
+.question input{margin-right:8px}
+.chatbox{background:#f5f9ff;border:1px solid var(--line);border-radius:15px;padding:15px;min-height:150px;max-height:300px;overflow:auto;margin:12px 0}
+.message{padding:12px 14px;background:white;border:1px solid var(--line);border-radius:12px;margin:8px 0;line-height:1.6;font-size:14px}
+.message.user{background:#eaf3ff;margin-left:25px}
+.message.ai{margin-right:25px}
+.score{font-size:44px;color:var(--blue);font-weight:900}
+.progress{height:9px;background:#eaf0f8;border-radius:20px;overflow:hidden}
+.progress div{height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan))}
+.certificate{border:8px double #b5d3f4;padding:30px;text-align:center;background:#fbfdff}
+.certificate h2{font-size:27px;color:#174d91}
+.certificate .cert-name{font-size:24px;color:var(--navy);font-weight:800;margin:22px}
+footer{padding:30px 6%;background:#142c50;color:#d6e5f7;text-align:center;font-size:13px;line-height:1.8}
+.notice{padding:13px 15px;border-radius:12px;background:#fff8e8;color:#8b671b;font-size:13px;line-height:1.6}
+table{width:100%;border-collapse:collapse;font-size:13px}
+td,th{padding:12px;border-bottom:1px solid var(--line);text-align:left}
+th{color:var(--navy);background:#f5f8fd}
+@media(max-width:800px){
+ .nav{display:none;position:absolute;top:71px;left:0;right:0;background:white;padding:12px 5%;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch}
+ .nav.open{display:flex}.nav button{text-align:left}.mobile-menu{display:block}
+ .hero{grid-template-columns:1fr;padding-top:42px}.hero-art{min-height:230px}
+ .stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr 1fr}
+ .two{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column}
+}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.container{width:92%}.panel{padding:18px}.topbar{padding:0 4%}}
+@media print{
+ body{background:white}.topbar,footer,.no-print{display:none!important}
+ .page{display:none!important}#certificatePage{display:block!important}
+ #certificatePage .panel{border:0;box-shadow:none}
+}
+</style>
 </head>
-
 <body>
+<header class="topbar">
+ <div class="brand"><div class="logo">⚖</div><div>LEGAL AI CAMPUS<small>LEGAL EDUCATION • ARTIFICIAL INTELLIGENCE</small></div></div>
+ <button class="mobile-menu" onclick="document.querySelector('.nav').classList.toggle('open')">☰</button>
+ <nav class="nav" id="nav">
+  <button class="active" onclick="go('home',this)">Trang chủ</button>
+  <button onclick="go('scenarios',this)">Tình huống</button>
+  <button onclick="go('assistant',this)">Trợ lý AI</button>
+  <button onclick="go('student',this)">Sinh viên</button>
+  <button onclick="go('instructor',this)">Giảng viên</button>
+ </nav>
+</header>
 
-  <div class="topbar">
-    <div class="container topbar-inner">
-      <span><i class="fa-solid fa-graduation-cap"></i> NỀN TẢNG HỌC TẬP VÀ THỰC HÀNH PHÁP LÝ SỐ</span>
-      <span><i class="fa-solid fa-microchip"></i> AI-POWERED LEGAL LEARNING</span>
+<main>
+<section id="home" class="page active">
+ <div class="container">
+  <div class="hero">
+   <div>
+    <div class="eyebrow">NỀN TẢNG HỌC TẬP PHÁP LÝ THẾ HỆ MỚI</div>
+    <h1>Khám phá pháp luật.<br><span>Làm chủ công nghệ AI.</span></h1>
+    <p class="lead">Môi trường mô phỏng học tập và rèn luyện tư duy nghiệp vụ Kiểm sát viên. Kết hợp kiến thức pháp luật, tình huống thực tiễn giả định và công nghệ trí tuệ nhân tạo.</p>
+    <div class="actions">
+     <button class="btn primary" onclick="go('scenarios')">Bắt đầu học tập →</button>
+     <button class="btn secondary" onclick="go('student')">Khu vực sinh viên</button>
     </div>
+   </div>
+   <div class="hero-art"><div class="hero-symbol"><div class="shield">⚖</div><h3>LEGAL AI CAMPUS</h3><p>Learn • Analyze • Verify • Practice</p></div></div>
   </div>
-
-  <header>
-    <div class="container navbar">
-      <a href="#home" class="brand">
-        <div class="brand-icon"><i class="fa-solid fa-scale-balanced"></i></div>
-        <div>
-          <div class="brand-name">LEGAL AI CAMPUS</div>
-          <div class="brand-sub">DIGITAL LEGAL LEARNING PLATFORM</div>
-        </div>
-      </a>
-
-      <nav class="nav-links" id="navLinks">
-        <a href="#home">Trang chủ</a>
-        <a href="#about">Giới thiệu</a>
-        <a href="#cases">Tình huống</a>
-        <a href="#ai">Trợ lý AI</a>
-        <a href="#library">Thư viện số</a>
-      </nav>
-
-      <div class="nav-actions">
-        <button class="btn btn-outline" onclick="showLogin()">Đăng nhập</button>
-        <a href="#cases" class="btn btn-primary">Bắt đầu thực hành <i class="fa-solid fa-arrow-right"></i></a>
-        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Mở menu">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <main>
-
-    <section class="hero" id="home">
-      <div class="container hero-grid">
-        <div>
-          <div class="eyebrow">
-            <i class="fa-solid fa-brain"></i>
-            HỌC TẬP PHÁP LÝ TRONG KỶ NGUYÊN AI
-          </div>
-
-          <h1>
-            Làm chủ tri thức.<br>
-            <span>Vững vàng nghiệp vụ.</span>
-          </h1>
-
-          <p class="hero-desc">
-            LEGAL AI CAMPUS là không gian học tập và mô phỏng thực hành pháp lý số,
-            hỗ trợ sinh viên rèn luyện tư duy pháp lý, nghiên cứu hồ sơ, đánh giá chứng cứ
-            và kiểm chứng thông tin pháp luật với sự hỗ trợ của trí tuệ nhân tạo.
-          </p>
-
-          <div class="hero-buttons">
-            <a href="#cases" class="btn btn-primary">
-              <i class="fa-solid fa-play"></i> Khám phá tình huống
-            </a>
-            <a href="#about" class="btn btn-outline">
-              <i class="fa-solid fa-circle-info"></i> Tìm hiểu nền tảng
-            </a>
-          </div>
-
-          <div class="hero-note">
-            <span><i class="fa-solid fa-shield-halved"></i> Học tập có kiểm chứng</span>
-            <span><i class="fa-solid fa-scale-balanced"></i> Tư duy pháp lý</span>
-            <span><i class="fa-solid fa-network-wired"></i> Công nghệ AI</span>
-          </div>
-        </div>
-
-        <div class="hero-visual">
-          <div class="visual-glow"></div>
-
-          <div class="floating-chip chip-one">
-            <i class="fa-solid fa-brain"></i> AI Legal Assistant
-          </div>
-
-          <div class="visual-card">
-            <div class="visual-content">
-              <div class="visual-emblem">
-                <i class="fa-solid fa-scale-balanced"></i>
-              </div>
-              <h3>LEGAL AI CAMPUS</h3>
-              <p>LEGAL KNOWLEDGE · DIGITAL TECHNOLOGY</p>
-              <p style="margin-top:15px;color:#3475b9;font-weight:700">
-                MÔ PHỎNG - PHÂN TÍCH - KIỂM CHỨNG
-              </p>
-            </div>
-          </div>
-
-          <div class="floating-chip chip-two">
-            <i class="fa-solid fa-file-shield"></i> Digital Case Study
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="stats">
-      <div class="container">
-        <div class="stats-grid">
-          <div class="stat">
-            <strong>05</strong>
-            <span>Tình huống mô phỏng</span>
-          </div>
-          <div class="stat">
-            <strong>06</strong>
-            <span>Vai trò trợ lý AI</span>
-          </div>
-          <div class="stat">
-            <strong>07</strong>
-            <span>Bước thực hành</span>
-          </div>
-          <div class="stat">
-            <strong>100%</strong>
-            <span>Định hướng học tập</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="about">
-      <div class="container">
-        <div class="section-heading">
-          <div class="tag">About the platform</div>
-          <h2>Không gian học tập pháp lý tích hợp trí tuệ nhân tạo</h2>
-          <p>
-            Kết nối kiến thức pháp luật, tình huống thực tiễn và công nghệ AI
-            trong một môi trường học tập tương tác.
-          </p>
-        </div>
-
-        <div class="feature-grid">
-          <article class="feature-card">
-            <div class="feature-icon"><i class="fa-solid fa-folder-open"></i></div>
-            <h3>Hồ sơ vụ án điện tử</h3>
-            <p>Tiếp cận tài liệu, dữ liệu và tình tiết vụ việc theo cấu trúc hồ sơ mô phỏng, phục vụ quá trình nghiên cứu và phân tích.</p>
-          </article>
-
-          <article class="feature-card">
-            <div class="feature-icon"><i class="fa-solid fa-brain"></i></div>
-            <h3>Trợ lý AI đa vai trò</h3>
-            <p>Hỗ trợ giải thích vấn đề pháp lý, gợi ý phân tích, phản biện lập luận và kiểm tra nguồn thông tin.</p>
-          </article>
-
-          <article class="feature-card">
-            <div class="feature-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
-            <h3>Kiểm chứng pháp luật</h3>
-            <p>Định hướng sinh viên đối chiếu thông tin AI với văn bản pháp luật và nguồn chính thức.</p>
-          </article>
-
-          <article class="feature-card">
-            <div class="feature-icon"><i class="fa-solid fa-scale-balanced"></i></div>
-            <h3>Rèn luyện tư duy pháp lý</h3>
-            <p>Phân tích tình tiết, đánh giá chứng cứ, xác định vấn đề cần chứng minh và xây dựng quan điểm.</p>
-          </article>
-
-          <article class="feature-card">
-            <div class="feature-icon"><i class="fa-solid fa-comments"></i></div>
-            <h3>Phản biện và đối thoại</h3>
-            <p>Thực hành bảo vệ quan điểm, tiếp nhận ý kiến phản biện và điều chỉnh lập luận dựa trên căn cứ.</p>
-          </article>
-
-          <article class="feature-card">
-            <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
-            <h3>Đánh giá năng lực</h3>
-            <p>Định hướng đánh giá quá trình học tập, kỹ năng sử dụng AI, khả năng kiểm chứng và lập luận pháp lý.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section cases-section" id="cases">
-      <div class="container">
-        <div class="section-heading">
-          <div class="tag">Digital case simulation</div>
-          <h2>Phòng thực hành tình huống nghiệp vụ</h2>
-          <p>
-            Lựa chọn tình huống để bước vào môi trường mô phỏng nghiên cứu hồ sơ,
-            phân tích pháp lý và thực hành quan điểm nghiệp vụ.
-          </p>
-        </div>
-
-        <div class="case-grid">
-
-          <article class="case-card">
-            <div class="case-cover"><i class="fa-solid fa-box-open"></i></div>
-            <div class="case-body">
-              <span class="case-label">TÌNH HUỐNG 01 · HÌNH SỰ</span>
-              <h3>Vụ án xâm phạm sở hữu</h3>
-              <p>Nghiên cứu hồ sơ, đánh giá tài liệu, xác định dấu hiệu pháp lý và xây dựng quan điểm xử lý.</p>
-              <div class="case-meta"><span><i class="fa-regular fa-clock"></i> 45–60 phút</span><span>Cơ bản - Nâng cao</span></div>
-              <button class="case-action" onclick="openCase(1)">Vào phòng thực hành <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-          </article>
-
-          <article class="case-card">
-            <div class="case-cover"><i class="fa-solid fa-building-columns"></i></div>
-            <div class="case-body">
-              <span class="case-label">TÌNH HUỐNG 02 · KINH TẾ</span>
-              <h3>Vụ án về hành vi chiếm đoạt tài sản</h3>
-              <p>Phân tích hành vi, tài liệu giao dịch, lời khai và các vấn đề pháp lý cần chứng minh.</p>
-              <div class="case-meta"><span><i class="fa-regular fa-clock"></i> 60 phút</span><span>Trung bình</span></div>
-              <button class="case-action" onclick="openCase(2)">Vào phòng thực hành <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-          </article>
-
-          <article class="case-card">
-            <div class="case-cover"><i class="fa-solid fa-car-burst"></i></div>
-            <div class="case-body">
-              <span class="case-label">TÌNH HUỐNG 03 · GIAO THÔNG</span>
-              <h3>Vụ việc về trật tự an toàn giao thông</h3>
-              <p>Đánh giá dữ liệu, tài liệu hiện trường, lỗi và mối quan hệ giữa hành vi với hậu quả.</p>
-              <div class="case-meta"><span><i class="fa-regular fa-clock"></i> 60 phút</span><span>Trung bình</span></div>
-              <button class="case-action" onclick="openCase(3)">Vào phòng thực hành <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-          </article>
-
-          <article class="case-card">
-            <div class="case-cover"><i class="fa-solid fa-file-circle-check"></i></div>
-            <div class="case-body">
-              <span class="case-label">TÌNH HUỐNG 04 · GIẢ ĐỊNH</span>
-              <h3>Kiểm sát việc giải quyết nguồn tin về tội phạm</h3>
-              <p>Thực hành kiểm tra tài liệu, thời hạn, trình tự và căn cứ giải quyết nguồn tin.</p>
-              <div class="case-meta"><span><i class="fa-regular fa-clock"></i> 45 phút</span><span>Thực hành</span></div>
-              <button class="case-action" onclick="openCase(4)">Vào phòng thực hành <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-          </article>
-
-          <article class="case-card">
-            <div class="case-cover"><i class="fa-solid fa-robot"></i></div>
-            <div class="case-body">
-              <span class="case-label">TÌNH HUỐNG 05 · GIẢ ĐỊNH</span>
-              <h3>Kiểm chứng nhận định do AI tạo ra</h3>
-              <p>Phát hiện thông tin chưa chính xác, đối chiếu văn bản và đánh giá độ tin cậy của AI.</p>
-              <div class="case-meta"><span><i class="fa-regular fa-clock"></i> 45 phút</span><span>Vận dụng cao</span></div>
-              <button class="case-action" onclick="openCase(5)">Vào phòng thực hành <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-          </article>
-
-          <article class="case-card">
-            <div class="case-cover"><i class="fa-solid fa-graduation-cap"></i></div>
-            <div class="case-body">
-              <span class="case-label">LEARNING CENTER</span>
-              <h3>Không gian tự học và ôn luyện</h3>
-              <p>Hệ thống hóa kiến thức, thực hành kỹ năng tra cứu và tự đánh giá năng lực sử dụng AI.</p>
-              <div class="case-meta"><span><i class="fa-solid fa-book"></i> Tự học</span><span>Mọi cấp độ</span></div>
-              <button class="case-action" onclick="showToast('Khu vực tự học sẽ được triển khai ở phiên bản tiếp theo.')">Khám phá học liệu <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-          </article>
-
-        </div>
-
-        <div class="notice">
-          <i class="fa-solid fa-circle-info"></i>
-          Các tình huống được thiết kế phục vụ học tập. Tình huống 04 và 05 là giả định.
-          Những tình huống dựa trên vụ án công khai chỉ được xác định là vụ án có thật
-          khi đã đối chiếu được nguồn bản án hoặc tài liệu chính thức.
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="ai">
-      <div class="container">
-        <div class="section-heading">
-          <div class="tag">AI multi-agent system</div>
-          <h2>Hệ thống trợ lý AI đa vai trò</h2>
-          <p>Mỗi trợ lý đảm nhiệm một chức năng hỗ trợ riêng trong quá trình học tập và thực hành.</p>
-        </div>
-
-        <div class="roles-grid">
-          <div class="role-card">
-            <div class="role-icon"><i class="fa-solid fa-robot"></i></div>
-            <div><h3>AI Assistant</h3><p>Hỗ trợ giải thích khái niệm, tóm tắt tài liệu và định hướng nghiên cứu.</p></div>
-          </div>
-          <div class="role-card">
-            <div class="role-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
-            <div><h3>AI Legal Analyst</h3><p>Gợi ý phân tích tình tiết, vấn đề pháp lý và cấu trúc lập luận.</p></div>
-          </div>
-          <div class="role-card">
-            <div class="role-icon"><i class="fa-solid fa-scale-balanced"></i></div>
-            <div><h3>AI Defense</h3><p>Mô phỏng góc nhìn phản biện để sinh viên kiểm tra tính chặt chẽ của quan điểm.</p></div>
-          </div>
-          <div class="role-card">
-            <div class="role-icon"><i class="fa-solid fa-gavel"></i></div>
-            <div><h3>AI Judge Simulator</h3><p>Đưa ra câu hỏi giả lập nhằm kiểm tra tính logic và căn cứ của lập luận.</p></div>
-          </div>
-          <div class="role-card">
-            <div class="role-icon"><i class="fa-solid fa-shield-halved"></i></div>
-            <div><h3>AI Legal Verifier</h3><p>Hỗ trợ đối chiếu trích dẫn và kiểm tra nguồn văn bản pháp luật.</p></div>
-          </div>
-          <div class="role-card">
-            <div class="role-icon"><i class="fa-solid fa-chart-simple"></i></div>
-            <div><h3>AI Evaluator</h3><p>Đánh giá bài làm theo tiêu chí và thang điểm được giảng viên thiết lập.</p></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section workflow">
-      <div class="container">
-        <div class="section-heading">
-          <div class="tag">Learning journey</div>
-          <h2>Quy trình thực hành 7 bước</h2>
-          <p>Người học chủ động nghiên cứu, kiểm chứng và chịu trách nhiệm về quan điểm của mình.</p>
-        </div>
-
-        <div class="steps">
-          <div class="step"><div class="step-number">01</div><h3>Tiếp nhận hồ sơ</h3><p>Đọc thông tin vụ việc và nhiệm vụ.</p></div>
-          <div class="step"><div class="step-number">02</div><h3>Nghiên cứu hồ sơ</h3><p>Phân loại tài liệu và tình tiết.</p></div>
-          <div class="step"><div class="step-number">03</div><h3>Trao đổi với AI</h3><p>Đặt câu hỏi và nhận gợi ý.</p></div>
-          <div class="step"><div class="step-number">04</div><h3>Đánh giá chứng cứ</h3><p>Đối chiếu, phân tích, kiểm tra.</p></div>
-          <div class="step"><div class="step-number">05</div><h3>Xây dựng quan điểm</h3><p>Đưa ra nhận định độc lập.</p></div>
-          <div class="step"><div class="step-number">06</div><h3>Phản biện</h3><p>Bảo vệ và điều chỉnh lập luận.</p></div>
-          <div class="step"><div class="step-number">07</div><h3>Đánh giá kết quả</h3><p>Nhận xét và rút kinh nghiệm.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section lab-section">
-      <div class="container">
-        <div class="lab-panel">
-          <div class="lab-info">
-            <div class="eyebrow"><i class="fa-solid fa-microchip"></i> AI INTERACTIVE SPACE</div>
-            <h2>Trải nghiệm trợ lý AI pháp lý</h2>
-            <p>
-              Không chỉ tiếp nhận câu trả lời, sinh viên cần chủ động đặt câu hỏi,
-              yêu cầu căn cứ, kiểm tra nguồn và đánh giá mức độ phù hợp của thông tin.
-            </p>
-
-            <ul class="lab-bullets">
-              <li><i class="fa-solid fa-check-circle"></i> Hỗ trợ tư duy phản biện</li>
-              <li><i class="fa-solid fa-check-circle"></i> Khuyến khích kiểm chứng thông tin</li>
-              <li><i class="fa-solid fa-check-circle"></i> Không thay thế quyết định của người học</li>
-              <li><i class="fa-solid fa-check-circle"></i> Chú trọng liêm chính học thuật</li>
-            </ul>
-          </div>
-
-          <div class="chat-box">
-            <div class="chat-header">
-              <i class="fa-solid fa-brain"></i>
-              LEGAL AI ASSISTANT
-              <span style="margin-left:auto;color:#168d7d;font-size:10px">● DEMO</span>
-            </div>
-
-            <div class="chat-messages" id="chatMessages">
-              <div class="message ai">
-                Xin chào! Tôi là giao diện minh họa trợ lý AI pháp lý.
-                Bạn có thể thử đặt câu hỏi về phương pháp nghiên cứu hồ sơ,
-                kiểm chứng thông tin pháp luật hoặc tư duy pháp lý.
-              </div>
-            </div>
-
-            <form class="chat-input" id="chatForm">
-              <input id="chatInput" type="text" placeholder="Nhập câu hỏi của bạn..." autocomplete="off">
-              <button type="submit" aria-label="Gửi câu hỏi"><i class="fa-solid fa-paper-plane"></i></button>
-            </form>
-          </div>
-        </div>
-        <div class="notice">
-          <i class="fa-solid fa-circle-exclamation"></i>
-          Khung trò chuyện hiện là bản minh họa giao diện, chưa kết nối mô hình AI hoặc API.
-          Không sử dụng nội dung demo làm căn cứ pháp lý.
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="library">
-      <div class="container">
-        <div class="section-heading">
-          <div class="tag">Digital legal library</div>
-          <h2>Thư viện học liệu pháp lý số</h2>
-          <p>Định hướng kết nối nguồn pháp luật chính thống và tài liệu phục vụ học tập, nghiên cứu.</p>
-        </div>
-
-        <div class="library-grid">
-          <div class="library-card">
-            <i class="fa-solid fa-book-bookmark"></i>
-            <h3>Cơ sở dữ liệu văn bản pháp luật</h3>
-            <p>Tra cứu văn bản quy phạm pháp luật và thông tin hiệu lực văn bản.</p>
-            <a href="https://vbpl.vn/" target="_blank" rel="noopener">Truy cập nguồn chính thức <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-          </div>
-
-          <div class="library-card">
-            <i class="fa-solid fa-landmark"></i>
-            <h3>Cổng văn bản Chính phủ</h3>
-            <p>Tìm kiếm văn bản, quyết định và thông tin pháp lý do cơ quan có thẩm quyền công bố.</p>
-            <a href="https://vanban.chinhphu.vn/" target="_blank" rel="noopener">Truy cập cổng văn bản <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-          </div>
-
-          <div class="library-card">
-            <i class="fa-solid fa-graduation-cap"></i>
-            <h3>Học liệu và nghiên cứu</h3>
-            <p>Không gian dự kiến lưu trữ tài liệu học tập, hướng dẫn thực hành và nghiên cứu khoa học.</p>
-            <a href="#research">Tìm hiểu thêm <i class="fa-solid fa-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="research">
-      <div class="container">
-        <div class="section-heading">
-          <div class="tag">Research & innovation</div>
-          <h2>Học tập gắn với nghiên cứu khoa học</h2>
-          <p>Hướng tới xây dựng môi trường thực nghiệm về ứng dụng AI trong đào tạo pháp luật.</p>
-        </div>
-
-        <div class="feature-grid">
-          <div class="feature-card">
-            <div class="feature-icon"><i class="fa-solid fa-flask"></i></div>
-            <h3>Thực nghiệm sư phạm</h3>
-            <p>Thiết kế hoạt động học tập có và không có sự hỗ trợ của AI để đánh giá sự thay đổi về năng lực.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon"><i class="fa-solid fa-chart-pie"></i></div>
-            <h3>Đánh giá dữ liệu học tập</h3>
-            <p>Định hướng thu thập kết quả bài làm, phản hồi người học và mức độ kiểm chứng thông tin.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon"><i class="fa-solid fa-lightbulb"></i></div>
-            <h3>Đổi mới phương pháp</h3>
-            <p>Khuyến khích học tập chủ động, tư duy độc lập và sử dụng AI có trách nhiệm.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="cta">
-          <h2>Sẵn sàng bước vào môi trường thực hành pháp lý số?</h2>
-          <p>Khám phá tình huống, rèn luyện tư duy và làm chủ công nghệ AI trong học tập.</p>
-          <a href="#cases" class="btn">Bắt đầu khám phá <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <h3>LEGAL AI CAMPUS</h3>
-          <p>Nền tảng học tập và mô phỏng thực hành pháp lý số ứng dụng trí tuệ nhân tạo.</p>
-          <p style="margin-top:10px">LEGAL KNOWLEDGE · AI TECHNOLOGY · DIGITAL LEARNING</p>
-        </div>
-
-        <div>
-          <h3>Khám phá</h3>
-          <a href="#about">Giới thiệu nền tảng</a>
-          <a href="#cases">Phòng thực hành</a>
-          <a href="#ai">Trợ lý AI</a>
-          <a href="#library">Thư viện số</a>
-        </div>
-
-        <div>
-          <h3>Nguyên tắc sử dụng</h3>
-          <p>AI là công cụ hỗ trợ học tập, không thay thế tư duy độc lập, hoạt động xác minh và trách nhiệm của người học.</p>
-        </div>
-      </div>
-
-      <div class="copyright">
-        © 2026 LEGAL AI CAMPUS. Nền tảng phục vụ mục đích giáo dục và nghiên cứu.
-      </div>
-    </div>
-  </footer>
-
-  <div class="music-control">
-    <button id="musicButton" onclick="toggleMusic()" aria-label="Bật hoặc tắt nhạc">
-      <i class="fa-solid fa-volume-xmark"></i>
-    </button>
-    <span>Âm thanh</span>
-    <input id="volumeControl" type="range" min="0" max="1" step="0.05" value="0.25" aria-label="Âm lượng">
+  <div class="stats">
+   <div class="stat"><strong>05</strong><span>Tình huống mô phỏng</span></div>
+   <div class="stat"><strong>06</strong><span>Vai trò trợ lý AI</span></div>
+   <div class="stat"><strong>100</strong><span>Điểm đánh giá tối đa</span></div>
+   <div class="stat"><strong>24/7</strong><span>Học tập chủ động</span></div>
   </div>
-
-  <audio id="backgroundMusic" loop preload="none">
-    <source src="audio/campus.mp3" type="audio/mpeg">
-  </audio>
-
-  <div class="modal" id="caseModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-content">
-      <button class="modal-close" onclick="closeModal()" aria-label="Đóng">&times;</button>
-      <div class="eyebrow"><i class="fa-solid fa-folder-open"></i> DIGITAL CASE ROOM</div>
-      <h2 id="modalTitle">Phòng thực hành tình huống</h2>
-      <p id="modalDescription"></p>
-      <div class="modal-list">
-        <strong>Nội dung thực hành dự kiến:</strong>
-        <ul>
-          <li>Tiếp nhận và nghiên cứu hồ sơ tình huống.</li>
-          <li>Phân tích tài liệu, chứng cứ và vấn đề pháp lý.</li>
-          <li>Sử dụng AI để hỗ trợ, sau đó kiểm chứng kết quả.</li>
-          <li>Xây dựng quan điểm và tham gia phản biện.</li>
-          <li>Nhận đánh giá theo tiêu chí học tập.</li>
-        </ul>
-      </div>
-      <p><strong>Lưu ý:</strong> Đây là giao diện giới thiệu phòng thực hành. Hệ thống hồ sơ, lưu tiến độ và chấm điểm sẽ cần được kết nối backend.</p>
-      <button class="btn btn-primary" style="width:100%" onclick="closeModal(); showToast('Phòng thực hành chi tiết sẽ được triển khai ở bước tiếp theo.')">
-        Xác nhận <i class="fa-solid fa-arrow-right"></i>
-      </button>
-    </div>
+  <div class="section">
+   <div class="section-head"><div><div class="eyebrow">CAMPUS EXPERIENCE</div><h2>Không gian học tập số</h2><p>Rèn luyện năng lực pháp lý trong môi trường tương tác.</p></div></div>
+   <div class="grid">
+    <div class="card feature"><div class="feature-icon">📚</div><h3>Học tập theo tình huống</h3><p>Nghiên cứu hồ sơ giả định, xác định vấn đề pháp lý và xây dựng quan điểm có căn cứ.</p></div>
+    <div class="card feature"><div class="feature-icon">🤖</div><h3>Trợ lý AI đa vai trò</h3><p>Thử nghiệm các góc nhìn khác nhau, đặt câu hỏi và kiểm tra thông tin do AI cung cấp.</p></div>
+    <div class="card feature"><div class="feature-icon">🏅</div><h3>Đánh giá năng lực</h3><p>Theo dõi kết quả luyện tập, nhận phản hồi và lưu chứng nhận mô phỏng.</p></div>
+   </div>
   </div>
-
-  <div class="modal" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
-    <div class="modal-content">
-      <button class="modal-close" onclick="closeLogin()">&times;</button>
-      <div class="eyebrow"><i class="fa-solid fa-user-shield"></i> USER ACCESS</div>
-      <h2 id="loginTitle">Đăng nhập hệ thống</h2>
-      <p>Giao diện đăng nhập minh họa. Chức năng xác thực tài khoản cần được tích hợp với máy chủ.</p>
-      <form id="loginForm">
-        <label style="font-size:11px;font-weight:700">Email</label>
-        <input type="email" required placeholder="Nhập email" style="width:100%;padding:12px;border:1px solid #dce8f6;border-radius:10px;margin:7px 0 15px">
-        <label style="font-size:11px;font-weight:700">Mật khẩu</label>
-        <input type="password" required placeholder="Nhập mật khẩu" style="width:100%;padding:12px;border:1px solid #dce8f6;border-radius:10px;margin:7px 0 18px">
-        <button class="btn btn-primary" type="submit" style="width:100%">Đăng nhập</button>
-      </form>
-    </div>
+  <div class="section">
+   <div class="section-head"><div><div class="eyebrow">PRACTICE ZONE</div><h2>Tình huống nổi bật</h2></div><button class="btn secondary" onclick="go('scenarios')">Xem tất cả →</button></div>
+   <div class="grid" id="homeScenarios"></div>
   </div>
+  <div class="notice">Lưu ý học thuật: Các tình huống trên nền tảng là dữ liệu giả định phục vụ học tập, không thay thế hồ sơ vụ án, văn bản pháp luật chính thức hoặc hướng dẫn nghiệp vụ của cơ quan có thẩm quyền.</div>
+ </div>
+</section>
 
-  <div class="toast" id="toast"></div>
+<section id="scenarios" class="page">
+ <div class="container">
+  <div class="section-head"><div><div class="eyebrow">SIMULATION CENTER</div><h2>Thư viện tình huống mô phỏng</h2><p>Chọn một tình huống để bắt đầu nghiên cứu và thực hành.</p></div></div>
+  <div class="grid" id="allScenarios"></div>
+ </div>
+</section>
 
-  <script>
-    const cases = {
-      1: {
-        title: "Tình huống 01 – Vụ án xâm phạm sở hữu",
-        description: "Sinh viên nghiên cứu hồ sơ mô phỏng, đánh giá tài liệu và phân tích dấu hiệu pháp lý liên quan đến hành vi xâm phạm sở hữu."
-      },
-      2: {
-        title: "Tình huống 02 – Vụ án về hành vi chiếm đoạt tài sản",
-        description: "Sinh viên phân tích hành vi, tài liệu giao dịch, lời khai và các vấn đề cần chứng minh trong tình huống."
-      },
-      3: {
-        title: "Tình huống 03 – Trật tự an toàn giao thông",
-        description: "Sinh viên đánh giá dữ liệu, tài liệu hiện trường, lỗi và mối quan hệ giữa hành vi với hậu quả."
-      },
-      4: {
-        title: "Tình huống 04 – Kiểm sát giải quyết nguồn tin",
-        description: "Tình huống giả định nhằm rèn luyện kỹ năng kiểm tra trình tự, thời hạn, tài liệu và căn cứ giải quyết nguồn tin về tội phạm."
-      },
-      5: {
-        title: "Tình huống 05 – Kiểm chứng nhận định AI",
-        description: "Tình huống giả định trong đó sinh viên phải phát hiện, kiểm tra và đánh giá những nhận định AI có thể chưa chính xác."
-      }
-    };
+<section id="practice" class="page">
+ <div class="container">
+  <button class="btn secondary no-print" onclick="go('scenarios')">← Quay lại</button>
+  <div class="section-head" style="margin-top:20px"><div><div class="eyebrow" id="practiceCode">TÌNH HUỐNG</div><h2 id="practiceTitle">Tên tình huống</h2><p id="practiceLevel"></p></div></div>
+  <div class="two">
+   <div>
+    <div class="panel"><h3>📁 Bối cảnh giả định</h3><p id="practiceStory" class="muted"></p></div>
+    <div class="panel"><h3>🎯 Nhiệm vụ sinh viên</h3><div id="practiceTasks" class="muted"></div></div>
+    <div class="panel"><h3>🧭 Quy trình thực hiện</h3><ol class="muted"><li>Tiếp nhận và đọc dữ liệu tình huống.</li><li>Xác định vấn đề cần làm rõ.</li><li>Tham khảo trợ lý AI, ghi nhận nội dung cần kiểm chứng.</li><li>Đánh giá chứng cứ và nguồn thông tin.</li><li>Trình bày quan điểm cá nhân có lập luận.</li><li>Tự đánh giá và hoàn thiện bài làm.</li></ol></div>
+   </div>
+   <div>
+    <div class="panel"><h3>✍️ Bài làm của bạn</h3>
+     <p class="muted">Hãy trình bày cách tiếp cận và quan điểm của mình. Không nhập dữ liệu cá nhân hoặc hồ sơ thật.</p>
+     <textarea id="answer" placeholder="Nhập bài phân tích của bạn tại đây..." style="width:100%;min-height:210px;border:1px solid var(--line);border-radius:12px;padding:13px"></textarea>
+     <button class="btn primary" style="width:100%;margin-top:12px" onclick="submitAnswer()">Nộp bài và xem đánh giá</button>
+    </div>
+    <div class="panel"><h3>📊 Kết quả gần nhất</h3><div id="practiceResult" class="muted">Bạn chưa nộp bài ở tình huống này.</div></div>
+   </div>
+  </div>
+ </div>
+</section>
 
-    function toggleMenu() {
-      document.getElementById("navLinks").classList.toggle("open");
-    }
+<section id="assistant" class="page">
+ <div class="container">
+  <div class="section-head"><div><div class="eyebrow">AI MULTI-ROLE ASSISTANT</div><h2>Trợ lý AI pháp lý</h2><p>Thử nghiệm các vai trò hỗ trợ tư duy và học tập.</p></div></div>
+  <div class="two">
+   <div class="panel">
+    <h3>Chọn vai trò trợ lý</h3>
+    <div class="form">
+     <select id="aiRole">
+      <option value="assistant">AI Assistant – Trợ lý học tập</option>
+      <option value="analyst">AI Legal Analyst – Phân tích pháp lý</option>
+      <option value="defense">AI Defense – Góc nhìn phản biện</option>
+      <option value="judge">AI Judge Simulator – Câu hỏi phản biện</option>
+      <option value="verifier">AI Legal Verifier – Kiểm tra thông tin</option>
+      <option value="evaluator">AI Evaluator – Đánh giá bài làm</option>
+     </select>
+     <textarea id="aiPrompt" placeholder="Nhập câu hỏi hoặc nội dung cần hỗ trợ..."></textarea>
+     <button class="btn primary" onclick="askAI()">Gửi yêu cầu</button>
+    </div>
+   </div>
+   <div class="panel">
+    <h3>💬 Hội thoại</h3>
+    <div class="chatbox" id="chatbox"><div class="message ai">Xin chào! Tôi là trợ lý mô phỏng của LEGAL AI CAMPUS. Hãy đặt câu hỏi về phương pháp học tập, phân tích tình huống hoặc kiểm chứng thông tin.</div></div>
+    <button class="btn secondary" onclick="document.getElementById('chatbox').innerHTML=''">Xóa hội thoại</button>
+   </div>
+  </div>
+  <div class="notice">Đây là trợ lý AI mô phỏng bằng kịch bản trong trình duyệt, không phải mô hình AI trực tuyến. Không sử dụng câu trả lời này làm căn cứ pháp lý. Khi tra cứu, cần đối chiếu văn bản tại <a href="https://vbpl.vn/" target="_blank">Cơ sở dữ liệu quốc gia về văn bản pháp luật</a> và <a href="https://vanban.chinhphu.vn/" target="_blank">Cổng văn bản Chính phủ</a>.</div>
+ </div>
+</section>
 
-    document.querySelectorAll(".nav-links a").forEach(link => {
-      link.addEventListener("click", () => {
-        document.getElementById("navLinks").classList.remove("open");
-      });
-    });
+<section id="student" class="page">
+ <div class="container">
+  <div class="section-head"><div><div class="eyebrow">STUDENT PORTAL</div><h2>Khu vực sinh viên</h2><p>Đăng nhập demo để theo dõi tiến độ và kết quả luyện tập.</p></div></div>
+  <div class="two">
+   <div class="panel" id="loginPanel">
+    <h3>🔐 Đăng nhập / Tạo hồ sơ demo</h3>
+    <div class="form">
+     <input id="studentName" placeholder="Họ và tên">
+     <input id="studentClass" placeholder="Lớp / khóa học (không bắt buộc)">
+     <button class="btn primary" onclick="login()">Vào khu vực sinh viên</button>
+    </div>
+    <p class="muted" style="font-size:12px">Đây là hồ sơ thử nghiệm lưu trên thiết bị, không yêu cầu mật khẩu.</p>
+   </div>
+   <div class="panel hidden" id="profilePanel">
+    <h3>👤 Hồ sơ sinh viên</h3><h2 id="profileName"></h2><p id="profileClass" class="muted"></p>
+    <button class="btn secondary" onclick="logout()">Đăng xuất</button>
+   </div>
+   <div class="panel">
+    <h3>📈 Tiến độ học tập</h3>
+    <div class="score" id="averageScore">0</div><p class="muted">Điểm trung bình các bài đã nộp</p>
+    <div class="progress"><div id="progressBar" style="width:0%"></div></div>
+    <p class="muted" id="progressText">0/5 tình huống đã hoàn thành</p>
+   </div>
+  </div>
+  <div class="panel">
+   <h3>📋 Kết quả luyện tập</h3>
+   <div id="studentResults" class="muted">Chưa có kết quả. Hãy chọn tình huống và nộp bài.</div>
+  </div>
+  <div class="panel">
+   <h3>🏅 Chứng nhận học tập</h3>
+   <p class="muted">Khi hoàn thành ít nhất một tình huống, bạn có thể tạo chứng nhận mô phỏng ghi nhận kết quả học tập.</p>
+   <button class="btn primary" onclick="makeCertificate()">Tạo chứng nhận</button>
+  </div>
+ </div>
+</section>
 
-    function openCase(id) {
-      const item = cases[id];
-      if (!item) return;
-      document.getElementById("modalTitle").textContent = item.title;
-      document.getElementById("modalDescription").textContent = item.description;
-      document.getElementById("caseModal").classList.add("show");
-    }
+<section id="certificatePage" class="page">
+ <div class="container">
+  <div class="panel">
+   <div class="certificate" id="certificate">
+    <div class="eyebrow">LEGAL AI CAMPUS</div>
+    <h2>CHỨNG NHẬN HOÀN THÀNH HỌC TẬP</h2>
+    <p class="muted">Ban tổ chức LEGAL AI CAMPUS ghi nhận</p>
+    <div class="cert-name" id="certName">SINH VIÊN</div>
+    <p class="muted">Đã tham gia hoạt động học tập và thực hành tình huống mô phỏng pháp lý ứng dụng trí tuệ nhân tạo.</p>
+    <h3 id="certScore" style="color:#1769e0">Kết quả: 0 điểm</h3>
+    <p class="muted" id="certDate"></p>
+    <p style="margin-top:35px;color:#71819a">BAN TỔ CHỨC<br><b>LEGAL AI CAMPUS</b></p>
+   </div>
+   <div class="actions no-print"><button class="btn primary" onclick="window.print()">In / Lưu PDF</button><button class="btn secondary" onclick="go('student')">Quay lại</button></div>
+   <p class="notice no-print">Chứng nhận này là bản demo do website tạo ra, không phải văn bằng, chứng chỉ chính thức hoặc chứng nhận của Trường Đại học Kiểm sát.</p>
+  </div>
+ </div>
+</section>
 
-    function closeModal() {
-      document.getElementById("caseModal").classList.remove("show");
-    }
+<section id="instructor" class="page">
+ <div class="container">
+  <div class="section-head"><div><div class="eyebrow">INSTRUCTOR PORTAL</div><h2>Trang quản trị giảng viên</h2><p>Bảng điều khiển demo để theo dõi hoạt động trên thiết bị hiện tại.</p></div></div>
+  <div class="panel">
+   <h3>🔑 Truy cập quản trị demo</h3>
+   <div class="form"><input id="adminCode" type="password" placeholder="Nhập mã demo: CAMPUS2026"><button class="btn primary" onclick="adminLogin()">Mở bảng quản trị</button></div>
+   <p class="muted" style="font-size:12px">Mã này chỉ phục vụ giao diện thử nghiệm, không phải bảo mật tài khoản thực tế.</p>
+  </div>
+  <div id="adminPanel" class="hidden">
+   <div class="stats">
+    <div class="stat"><strong id="adminCount">0</strong><span>Lượt bài nộp</span></div>
+    <div class="stat"><strong id="adminAvg">0</strong><span>Điểm trung bình</span></div>
+    <div class="stat"><strong>05</strong><span>Tình huống</span></div>
+    <div class="stat"><strong>100</strong><span>Điểm tối đa</span></div>
+   </div>
+   <div class="panel"><h3>Danh sách kết quả trên thiết bị</h3><div id="adminResults"></div>
+    <button class="btn secondary" onclick="exportCSV()" style="margin-top:15px">Xuất bảng CSV</button>
+   </div>
+   <div class="panel"><h3>Rubric đánh giá 100 điểm</h3>
+    <table><tr><th>Tiêu chí</th><th>Điểm tối đa</th></tr>
+    <tr><td>Nghiên cứu hồ sơ</td><td>15</td></tr><tr><td>Xác định vấn đề pháp lý</td><td>20</td></tr>
+    <tr><td>Đánh giá chứng cứ</td><td>20</td></tr><tr><td>Kiểm chứng thông tin AI và pháp luật</td><td>20</td></tr>
+    <tr><td>Lập luận và quan điểm</td><td>15</td></tr><tr><td>Đạo đức, trách nhiệm sử dụng AI</td><td>10</td></tr></table>
+   </div>
+  </div>
+ </div>
+</section>
+</main>
 
-    function showLogin() {
-      document.getElementById("loginModal").classList.add("show");
-    }
+<footer>
+ <b>LEGAL AI CAMPUS</b><br>
+ Nền tảng mô phỏng học tập pháp lý và ứng dụng trí tuệ nhân tạo.<br>
+ Sản phẩm phục vụ mục đích học tập, nghiên cứu và thực hành tình huống giả định.
+</footer>
 
-    function closeLogin() {
-      document.getElementById("loginModal").classList.remove("show");
-    }
-
-    function showToast(message) {
-      const toast = document.getElementById("toast");
-      toast.textContent = message;
-      toast.classList.add("show");
-      clearTimeout(window.toastTimer);
-      window.toastTimer = setTimeout(() => toast.classList.remove("show"), 3000);
-    }
-
-    document.querySelectorAll(".modal").forEach(modal => {
-      modal.addEventListener("click", event => {
-        if (event.target === modal) modal.classList.remove("show");
-      });
-    });
-
-    document.addEventListener("keydown", event => {
-      if (event.key === "Escape") {
-        closeModal();
-        closeLogin();
-      }
-    });
-
-    document.getElementById("loginForm").addEventListener("submit", event => {
-      event.preventDefault();
-      showToast("Đăng nhập thật chưa được kích hoạt. Cần tích hợp hệ thống xác thực.");
-    });
-
-    // Chat demo: không gọi API và không đưa ra kết luận pháp lý.
-    const chatForm = document.getElementById("chatForm");
-    const chatInput = document.getElementById("chatInput");
-    const chatMessages = document.getElementById("chatMessages");
-
-    chatForm.addEventListener("submit", event => {
-      event.preventDefault();
-      const question = chatInput.value.trim();
-      if (!question) return;
-
-      addMessage(question, "user");
-      chatInput.value = "";
-
-      setTimeout(() => {
-        addMessage(
-          "Đây là phản hồi minh họa của giao diện. Khi triển khai hệ thống AI thật, câu trả lời cần được tạo từ mô hình đã kết nối, kèm nguồn kiểm chứng và thông tin về hiệu lực văn bản pháp luật. Bạn nên đối chiếu với nguồn chính thức trước khi sử dụng.",
-          "ai"
-        );
-      }, 450);
-    });
-
-    function addMessage(content, type) {
-      const message = document.createElement("div");
-      message.className = "message " + type;
-      message.textContent = content;
-      chatMessages.appendChild(message);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-
-    // Nhạc nền: người dùng phải chủ động bật.
-    const music = document.getElementById("backgroundMusic");
-    const musicButton = document.getElementById("musicButton");
-    const volumeControl = document.getElementById("volumeControl");
-    let musicPlaying = false;
-
-    music.volume = Number(volumeControl.value);
-
-    function toggleMusic() {
-      if (!musicPlaying) {
-        music.volume = Number(volumeControl.value);
-        music.play().then(() => {
-          musicPlaying = true;
-          musicButton.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
-          showToast("Đã bật nhạc nền.");
-        }).catch(() => {
-          showToast("Chưa phát được nhạc. Hãy kiểm tra file audio/campus.mp3.");
-        });
-      } else {
-        music.pause();
-        musicPlaying = false;
-        musicButton.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
-        showToast("Đã tắt nhạc nền.");
-      }
-    }
-
-    volumeControl.addEventListener("input", () => {
-      music.volume = Number(volumeControl.value);
-    });
-  </script>
-
+<script>
+const scenarios=[
+ {id:1,code:"TH01",title:"Nghiên cứu vụ việc xâm phạm sở hữu",level:"Cơ bản",icon:"📁",
+ story:"Một tình huống giả định về việc tài sản của cá nhân bị dịch chuyển khỏi nơi quản lý. Hồ sơ học tập gồm lời trình bày của những người liên quan, dữ liệu về thời gian, địa điểm và một số tài liệu cần được xác minh. Thông tin hiện có chưa đủ để kết luận về hành vi và trách nhiệm pháp lý.",
+ tasks:["Phân loại thông tin đã biết và thông tin cần xác minh.","Xác định những vấn đề pháp lý cần nghiên cứu.","Đề xuất cách đánh giá tính khách quan, liên quan của tài liệu.","Trình bày quan điểm thận trọng, không suy đoán khi thiếu căn cứ."]},
+   {id:2,code:"TH02",title:"Phân tích tình huống vụ việc kinh tế",level:"Trung bình",icon:"📊",
+ story:"Một doanh nghiệp giả định có dấu hiệu cung cấp thông tin không thống nhất trong giao dịch. Tài liệu gồm hợp đồng, chứng từ thanh toán và lời trình bày của các bên. Sinh viên cần phân biệt tranh chấp dân sự, vi phạm hành chính và dấu hiệu cần tiếp tục xác minh theo quy định pháp luật.",
+ tasks:["Hệ thống hóa các tài liệu trong tình huống.","Xác định nội dung mâu thuẫn giữa các nguồn thông tin.","Đề xuất hướng xác minh bổ sung.","Kiểm tra quy định pháp luật liên quan tại nguồn chính thức."]},
+ {id:3,code:"TH03",title:"Đánh giá tình huống giao thông",level:"Trung bình",icon:"🚦",
+ story:"Một vụ va chạm giao thông giả định xảy ra tại khu vực giao nhau. Hồ sơ mô phỏng có sơ đồ hiện trường, lời trình bày của người liên quan và dữ liệu thời gian. Các tài liệu có điểm chưa thống nhất, vì vậy không thể chỉ dựa vào một lời trình bày để đưa ra nhận định.",
+ tasks:["Xác định các dữ kiện khách quan cần làm rõ.","Phân tích sự thống nhất và mâu thuẫn giữa tài liệu.","Đánh giá giới hạn của từng nguồn thông tin.","Đề xuất hướng nghiên cứu quy định pháp luật phù hợp."]},
+ {id:4,code:"TH04",title:"Kiểm sát việc giải quyết nguồn tin",level:"Nâng cao",icon:"🔎",
+ story:"Cơ quan có thẩm quyền tiếp nhận một nguồn tin giả định về dấu hiệu vi phạm pháp luật. Tài liệu ban đầu chưa đầy đủ, một số thông tin chưa được kiểm tra độc lập. Sinh viên đóng vai người nghiên cứu để xây dựng danh mục vấn đề cần theo dõi và kiểm tra.",
+ tasks:["Xác định nội dung nguồn tin và phạm vi thông tin ban đầu.","Lập danh mục vấn đề cần xác minh.","Nghiên cứu thẩm quyền, trình tự và thời hạn theo văn bản hiện hành.","Trình bày phương án kiểm tra, giám sát có căn cứ."]},
+ {id:5,code:"TH05",title:"Phát hiện và kiểm chứng thông tin AI",level:"Nâng cao",icon:"🤖",
+ story:"Một trợ lý AI đưa ra câu trả lời về quy định pháp luật, kèm số điều và kết luận về hiệu lực văn bản. Tuy nhiên, câu trả lời chưa cung cấp nguồn chính thức và có khả năng nhầm lẫn giữa các phiên bản văn bản. Sinh viên phải kiểm tra trước khi sử dụng.",
+ tasks:["Chỉ ra những khẳng định cần kiểm chứng trong câu trả lời AI.","Tìm văn bản gốc và kiểm tra tình trạng hiệu lực.","Đối chiếu điều khoản, sửa đổi, bổ sung và quy định chuyển tiếp.","Viết lại câu trả lời có nguồn và nêu rõ giới hạn thông tin."]}
+];
+let currentScenario=1;
+let user=JSON.parse(localStorage.getItem("lac_user")||"null");
+let results=JSON.parse(localStorage.getItem("lac_results")||"[]");
+function save(){localStorage.setItem("lac_results",JSON.stringify(results));localStorage.setItem("lac_user",JSON.stringify(user))}
+function go(id,btn){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
+ if(btn)btn.classList.add("active");
+ document.querySelector(".nav").classList.remove("open");
+ if(id==="student")renderStudent();
+ if(id==="home")renderCards();
+ if(id==="instructor")document.getElementById("adminPanel").classList.add("hidden");
+ window.scrollTo(0,0);
+}
+function cardHTML(s){return `<div class="card feature scenario-card"><div class="feature-icon">${s.icon}</div><span class="tag">${s.code} • ${s.level}</span><h3>${s.title}</h3><p>${s.story.slice(0,125)}...</p><button class="btn secondary" onclick="openScenario(${s.id})">Vào tình huống →</button></div>`}
+function renderCards(){
+ document.getElementById("homeScenarios").innerHTML=scenarios.slice(0,3).map(s=>cardHTML(s)).join("");
+ document.getElementById("allScenarios").innerHTML=scenarios.map(s=>cardHTML(s)).join("");
+}
+function openScenario(id){
+ currentScenario=id;let s=scenarios.find(x=>x.id===id);
+ document.getElementById("practiceCode").textContent=s.code+" • "+s.level;
+ document.getElementById("practiceTitle").textContent=s.title;
+ document.getElementById("practiceLevel").textContent="Tình huống giả định phục vụ học tập";
+ document.getElementById("practiceStory").textContent=s.story;
+ document.getElementById("practiceTasks").innerHTML="<ul>"+s.tasks.map(t=>"<li>"+t+"</li>").join("")+"</ul>";
+ document.getElementById("answer").value="";
+ let old=results.find(r=>r.id===id);
+ document.getElementById("practiceResult").textContent=old?"Điểm gần nhất: "+old.score+"/100":"Bạn chưa nộp bài ở tình huống này.";
+ go("practice");
+}
+function submitAnswer(){
+ let answer=document.getElementById("answer").value.trim();
+ if(answer.length<50){alert("Bạn hãy viết bài phân tích ít nhất 50 ký tự trước khi nộp.");return}
+ let s=scenarios.find(x=>x.id===currentScenario);
+ let checks=[
+  ["Nghiên cứu hồ sơ",15,/hồ sơ|tài liệu|dữ kiện|thông tin/i.test(answer)],
+  ["Xác định vấn đề pháp lý",20,/pháp lý|quy định|điều luật|vấn đề/i.test(answer)],
+  ["Đánh giá chứng cứ",20,/chứng cứ|khách quan|mâu thuẫn|xác minh/i.test(answer)],
+  ["Kiểm chứng thông tin",20,/kiểm chứng|nguồn|hiệu lực|đối chiếu|văn bản/i.test(answer)],
+  ["Lập luận và quan điểm",15,/quan điểm|lập luận|nhận định|đề xuất/i.test(answer)],
+  ["Đạo đức sử dụng AI",10,/AI|trách nhiệm|đạo đức|không phụ thuộc/i.test(answer)]
+ ];
+ let score=checks.reduce((sum,c)=>sum+(c[2]?c[1]:Math.round(c[1]*.35)),0);
+ let item={id:currentScenario,code:s.code,title:s.title,score,answer,date:new Date().toLocaleString("vi-VN"),name:user?.name||"Sinh viên demo"};
+ results=results.filter(r=>r.id!==currentScenario);results.push(item);save();
+ document.getElementById("practiceResult").innerHTML=`<div class="score">${score}/100</div><b>Đã ghi nhận bài làm demo.</b><p class="muted">Điểm được tính tự động theo từ khóa và tiêu chí sơ bộ, không phải đánh giá chuyên môn của giảng viên.</p><ul>${checks.map(c=>`<li>${c[0]}: ${c[2]?"Đã nhận diện nội dung":"Cần bổ sung nội dung"} (${c[1]} điểm tối đa)</li>`).join("")}</ul>`;
+}
+function login(){
+ let name=document.getElementById("studentName").value.trim();
+ if(!name){alert("Hãy nhập họ tên.");return}
+ user={name,group:document.getElementById("studentClass").value.trim()||"Chưa cập nhật"};
+ save();renderStudent();alert("Đã tạo hồ sơ demo trên thiết bị.");
+}
+function logout(){user=null;save();renderStudent()}
+function renderStudent(){
+ let lp=document.getElementById("loginPanel"),pp=document.getElementById("profilePanel");
+ lp.classList.toggle("hidden",!!user);pp.classList.toggle("hidden",!user);
+ if(user){document.getElementById("profileName").textContent=user.name;document.getElementById("profileClass").textContent=user.group}
+ let count=results.length,avg=count?Math.round(results.reduce((a,b)=>a+b.score,0)/count):0;
+ document.getElementById("averageScore").textContent=avg;
+ document.getElementById("progressBar").style.width=(count/5*100)+"%";
+ document.getElementById("progressText").textContent=count+"/5 tình huống đã hoàn thành";
+ document.getElementById("studentResults").innerHTML=count?results.map(r=>`<p><b>${r.code} – ${r.title}</b><br><span class="muted">${r.score}/100 • ${r.date}</span></p>`).join(""):"Chưa có kết quả.";
+}
+function makeCertificate(){
+ if(!results.length){alert("Bạn cần hoàn thành ít nhất một tình huống.");return}
+ document.getElementById("certName").textContent=user?.name||"SINH VIÊN DEMO";
+ let avg=Math.round(results.reduce((a,b)=>a+b.score,0)/results.length);
+ document.getElementById("certScore").textContent="Kết quả trung bình: "+avg+"/100";
+ document.getElementById("certDate").textContent="Ngày tạo: "+new Date().toLocaleDateString("vi-VN");
+ go("certificatePage");
+}
+function adminLogin(){
+ if(document.getElementById("adminCode").value!=="CAMPUS2026"){alert("Mã demo chưa đúng.");return}
+ document.getElementById("adminPanel").classList.remove("hidden");
+ let avg=results.length?Math.round(results.reduce((a,b)=>a+b.score,0)/results.length):0;
+ document.getElementById("adminCount").textContent=results.length;
+ document.getElementById("adminAvg").textContent=avg;
+ document.getElementById("adminResults").innerHTML=results.length?`<table><tr><th>Sinh viên</th><th>Tình huống</th><th>Điểm</th><th>Thời gian</th></tr>${results.map(r=>`<tr><td>${escapeHTML(r.name)}</td><td>${r.code}</td><td>${r.score}</td><td>${r.date}</td></tr>`).join("")}</table>`:"Chưa có bài nộp trên thiết bị này.";
+}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function exportCSV(){
+ let csv="Sinh vien,Tinh huong,Diem,Thoi gian\n"+results.map(r=>[r.name,r.code,r.score,r.date].map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(",")).join("\n");
+ let a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8"}));a.download="legal-ai-campus-ket-qua.csv";a.click();URL.revokeObjectURL(a.href);
+}
+function askAI(){
+ let prompt=document.getElementById("aiPrompt").value.trim();if(!prompt){alert("Hãy nhập câu hỏi.");return}
+ let role=document.getElementById("aiRole").value;
+ let names={assistant:"AI Assistant",analyst:"AI Legal Analyst",defense:"AI Defense",judge:"AI Judge Simulator",verifier:"AI Legal Verifier",evaluator:"AI Evaluator"};
+ let replies={
+ assistant:"Tôi có thể giúp bạn hệ thống hóa nội dung, giải thích khái niệm và xây dựng dàn ý. Hãy chia câu hỏi thành các vấn đề nhỏ, xác định dữ kiện đã có và nội dung còn thiếu trước khi đưa ra kết luận.",
+ analyst:"Gợi ý phân tích: (1) Tóm tắt dữ kiện; (2) Xác định vấn đề pháp lý; (3) Xác định quy định cần tra cứu; (4) Đối chiếu từng dữ kiện với tài liệu; (5) Nêu điểm chưa rõ và hướng xác minh. Không kết luận vượt quá tài liệu hiện có.",
+ defense:"Từ góc nhìn phản biện, cần kiểm tra liệu nhận định ban đầu có bỏ qua tình tiết gỡ tội, tài liệu mâu thuẫn hoặc cách giải thích khác hay không. Hãy xem xét cả thông tin ủng hộ và không ủng hộ giả thuyết đang nghiên cứu.",
+ judge:"Các câu hỏi phản biện: Dữ kiện nào là khách quan? Nguồn tài liệu có đáng tin cậy không? Có mâu thuẫn nào chưa được giải thích? Quy định được viện dẫn còn hiệu lực không? Có giả thuyết thay thế nào cần xem xét?",
+ verifier:"Tôi chưa thể xác minh trực tuyến văn bản hoặc tình trạng hiệu lực. Bạn cần tra cứu văn bản gốc tại vbpl.vn hoặc vanban.chinhphu.vn, kiểm tra số hiệu, ngày ban hành, ngày hiệu lực, sửa đổi, thay thế và điều khoản chuyển tiếp. Không dựa vào câu trả lời AI làm nguồn pháp lý.",
+ evaluator:"Khung tự đánh giá: nghiên cứu hồ sơ 15 điểm; xác định vấn đề pháp lý 20; đánh giá chứng cứ 20; kiểm chứng thông tin AI và pháp luật 20; lập luận 15; đạo đức sử dụng AI 10. Hãy tự đối chiếu từng tiêu chí và bổ sung căn cứ cụ thể."
+ };
+ let box=document.getElementById("chatbox");
+ box.innerHTML+=`<div class="message user"><b>Bạn:</b> ${escapeHTML(prompt)}</div><div class="message ai"><b>${names[role]}:</b><br>${replies[role]}<br><br><i>Đây là phản hồi mô phỏng để luyện tập, không phải tư vấn pháp lý hay kết quả xác minh thật.</i></div>`;
+ document.getElementById("aiPrompt").value="";box.scrollTop=box.scrollHeight;
+}
+renderCards();renderStudent();
+</script>
 </body>
 </html>
+ {id:2,code:"TH02",title:"Phân tích tình huống vụ việc kinh tế",level:"Trung bình",icon:"📊",
+ story:"Một doanh nghiệp giả định có dấu hiệu cung cấp thông tin không thống nhất trong giao dịch. Tài liệu gồm hợp đồng, chứng từ thanh toán và lời trình bày của các bên. Sinh viên cần phân biệt tranh chấp dân sự, vi phạm hành chính và dấu hiệu cần tiếp tục xác minh theo quy định pháp luật.",
+ tasks:["Hệ thống hóa các tài liệu trong tình huống.","Xác định nội dung mâu thuẫn giữa các nguồn thông tin.","Đề xuất hướng xác mi
